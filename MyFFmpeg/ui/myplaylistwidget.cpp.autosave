@@ -57,8 +57,9 @@ void MyPlayListWidget::initUi()
 
     m_playListView->setBackgroundRole(QPalette::Midlight);
     m_playListView->setAutoFillBackground(true);
+    
+    
     QStandardItemModel *tItemModel = new QStandardItemModel();
-
     DStandardItem *tItem1 = new DStandardItem(QIcon::fromTheme(":/images/ok.svg"),tr("视频一"));
     tItemModel->appendRow(tItem1);
     DStandardItem *tItem2 = new DStandardItem(QIcon::fromTheme(":/images/ok.svg"),tr("视频二"));
@@ -113,6 +114,11 @@ QStringList MyPlayListWidget::openFiles()
     tDFileDialog->exec();
     QStringList tFiles = tDFileDialog->selectedFiles();
     return tFiles;
+}
+
+void MyPlayListWidget::apendPlayListView()
+{
+    
 }
 
 

@@ -43,6 +43,7 @@
 #include <DListView>
 #include <DCommandLinkButton>
 #include <DIconButton>
+#include <DFileDialog>
 
 #include <QHBoxLayout>
 #include <QDebug>
@@ -55,8 +56,12 @@ DWIDGET_USE_NAMESPACE
  */
 class MyPlayListWidget : public DWidget
 {
+    Q_OBJECT
 public:
     MyPlayListWidget();
+
+private slots:
+    bool addVideoForPlayList();
 
 private:
 
@@ -65,8 +70,19 @@ private:
      */
     void initUi();
 
+    /**
+     * @brief 打开文件
+     * @return 选择的文件
+     */
+    QStringList openFiles();
+
+    void apendPlayListView();
+
     int m_iNum = 2;
     DListView *m_playListView;
+
+
+    QMap<QString,QString> m_playFileMap;
 
 
 
