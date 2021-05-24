@@ -39,6 +39,12 @@
 */
 #ifndef MYPLAYWIDGET_H
 #define MYPLAYWIDGET_H
+//本项目的文件
+#include "ui/myplaylistwidget.h"
+#include "ui/myplaywidget.h"
+#include "action/myplayengine.h"
+
+//dtk的类
 #include <DSlider>
 #include <DMainWindow>
 #include <DWidget>
@@ -47,6 +53,19 @@
 #include <QHBoxLayout>
 #include <QDebug>
 
+//qt的类
+#include <QPoint>
+#include <QPainter>
+//其他库
+extern "C"{
+#include <libavformat/avformat.h>
+#include <libavutil/display.h>
+#include <libavutil/avutil.h>
+}
+//cpp标准库
+
+//linux系统库
+
 DWIDGET_USE_NAMESPACE
 
 /**
@@ -54,8 +73,35 @@ DWIDGET_USE_NAMESPACE
  */
 class MyPlayWidget : public DWidget
 {
+    Q_OBJECT
 public:
     MyPlayWidget();
+
+public slots:
+    /**
+     * @brief 在界面显示每一帧图片
+     * @param 每一帧图片
+     */
+    void showOneFram(QImage img);
+
+protected:
+    /**
+     * @brief 重绘界面
+     */
+    void paintEvent(QPaintEvent *);
+
+
+private :
+    /**
+     * @brief 播放引擎
+     */
+    MyPlayEngine* m_playEngine;
+
+    /**
+     * @brief 每一帧图片
+     */
+    QImage m_image;
 };
 
-#endif // MYPALYWIDGET_H
+
+#endif // MYPLAYWIDGET_H

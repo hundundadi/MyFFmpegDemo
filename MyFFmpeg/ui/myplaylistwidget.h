@@ -44,7 +44,7 @@
 #include <DCommandLinkButton>
 #include <DIconButton>
 #include <DFileDialog>
-
+#include <DMessageBox>
 #include <QHBoxLayout>
 #include <QDebug>
 #include <QIcon>
@@ -59,9 +59,26 @@ class MyPlayListWidget : public DWidget
     Q_OBJECT
 public:
     MyPlayListWidget();
+    /**
+     * @brief 获取当前选中的视频名称
+     * @return
+     */
+    QString getCurrentFile();
 
 private slots:
+    /**
+     * @brief 将打开的文件添加到播放列表
+     * @return
+     */
     bool addVideoForPlayList();
+
+    /**
+     * @brief 显示点击的项
+     * @param 点击项的index
+     */
+    void showClick(QModelIndex index);
+
+
 
 private:
 
@@ -76,14 +93,23 @@ private:
      */
     QStringList openFiles();
 
-    void apendPlayListView();
+    /**
+     * @brief 添加播放列表
+     */
+    bool apendPlayListView();
+
+
 
     int m_iNum = 2;
     DListView *m_playListView;
 
 
+    /**
+     * @brief 播放列表 key播放文件 value缩略图
+     */
     QMap<QString,QString> m_playFileMap;
 
+    QString m_currentFile;
 
 
 };

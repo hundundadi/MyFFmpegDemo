@@ -43,3 +43,22 @@ MyPlayWidget::MyPlayWidget()
 {
 
 }
+
+void MyPlayWidget::showOneFram(QImage img)
+{
+    m_image = img;
+    //激活重绘事件
+    update();
+}
+
+void MyPlayWidget::paintEvent(QPaintEvent *)
+{
+    if(0 >= m_image.size().width()) return;
+    QPainter painter(this);
+    //将图片缩放为窗口大小
+    QImage img = m_image.scaled(this->size(),Qt::IgnoreAspectRatio);
+    int x = this->width() - img.width();
+    int y = this->height() - img.height();
+    painter.drawImage(QPoint(x,y),img);
+
+}

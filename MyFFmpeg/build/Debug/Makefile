@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_X11EXTRAS_LIB -DQT_GUI_LIB -DQT_DBUS_LIB -DQT_XML_LIB -DQT_NETWORK_LIB -DQT_CONCURRENT_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_X11EXTRAS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_DBUS_LIB -DQT_XML_LIB -DQT_NETWORK_LIB -DQT_CONCURRENT_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../../../MyFFmpeg -I. -isystem /usr/include/libdtk-5.4.0/DWidget -isystem /usr/include/libdtk-5.4.12/DGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3/QtPrintSupport -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtX11Extras -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/libdtk-5.4.12/DCore -isystem /usr/include/x86_64-linux-gnu/qt5/QtDBus -isystem /usr/include/x86_64-linux-gnu/qt5/QtXml -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtConcurrent -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -isystem /usr/include/libdrm -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
+INCPATH       = -I../../../MyFFmpeg -I. -isystem /usr/include/libdtk-5.5.0/DWidget5.5 -isystem /usr/include/libdtk-5.5.0/DGui5.5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3/QtPrintSupport -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtX11Extras -isystem /usr/include/x86_64-linux-gnu/qt5/QtMultimedia -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/libdtk-5.5.0/DCore5.5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtDBus -isystem /usr/include/x86_64-linux-gnu/qt5/QtXml -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtConcurrent -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -isystem /usr/include/libdrm -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -35,10 +35,10 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = MyFFmpeg1.0.0
-DISTDIR = /data/home/wangcong/wangcong/workspace/qt_workspace/TestWorkspace/MyFFmpeg/build/Debug/.tmp/MyFFmpeg1.0.0
+DISTDIR = /data/home/wangcong/wangcong/workspace/qt_workspace/TestWorkspace/MyFFmpegDemo/MyFFmpeg/build/Debug/.tmp/MyFFmpeg1.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) -ldtkwidget -ldtkgui -lQt5PrintSupport -lQt5Widgets -lQt5X11Extras -lQt5Gui -ldtkcore -lQt5DBus -lQt5Xml -lQt5Network -lQt5Concurrent -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -ldtkwidget5.5 -ldtkgui5.5 -lQt5PrintSupport -lQt5Widgets -lQt5X11Extras -lQt5Multimedia -lQt5Gui -ldtkcore5.5 -lQt5DBus -lQt5Xml -lQt5Network -lQt5Concurrent -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -56,7 +56,12 @@ SOURCES       = ../../main.cpp \
 		../../ui/myplaywidget.cpp \
 		../../ui/myvideotranscodewidget.cpp \
 		../../ui/myvideoframewidget.cpp \
-		../../ui/mycaptionrecognitionwidget.cpp qrc_resources.cpp
+		../../ui/mycaptionrecognitionwidget.cpp \
+		../../action/myplaylist.cpp \
+		../../action/myplayengine.cpp qrc_resources.cpp \
+		moc_myplaylistwidget.cpp \
+		moc_myplaywidget.cpp \
+		moc_myplayengine.cpp
 OBJECTS       = main.o \
 		mymainwindow.o \
 		myplaylistwidget.o \
@@ -64,7 +69,12 @@ OBJECTS       = main.o \
 		myvideotranscodewidget.o \
 		myvideoframewidget.o \
 		mycaptionrecognitionwidget.o \
-		qrc_resources.o
+		myplaylist.o \
+		myplayengine.o \
+		qrc_resources.o \
+		moc_myplaylistwidget.o \
+		moc_myplaywidget.o \
+		moc_myplayengine.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -74,11 +84,18 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/g++-base.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/g++-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/qconfig.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_Baloo.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KActivities.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KCoreAddons.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KFileMetaData.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KWindowSystem.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3danimation.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dcore.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dextras.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dinput.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dlogic.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquick.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickanimation.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickextras.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickinput.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickrender.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickscene2d.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3drender.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_accessibility_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_concurrent.pri \
@@ -88,11 +105,16 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designer.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designer_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designercomponents_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkcommon.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkcore.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkcore5.5.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkgui.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkgui5.5.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkwidget.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkwidget5.5.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_edid_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_egl_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri \
@@ -104,6 +126,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_help.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_help_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_input_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_kms_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri \
@@ -111,6 +134,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_openglextensions.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_openglextensions_private.pri \
@@ -126,6 +150,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_theme_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uiplugin.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uitools.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uitools_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_vulkan_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets_private.pri \
@@ -165,13 +190,17 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../../ui/myplaywidget.h \
 		../../ui/myvideotranscodewidget.h \
 		../../ui/myvideoframewidget.h \
-		../../ui/mycaptionrecognitionwidget.h ../../main.cpp \
+		../../ui/mycaptionrecognitionwidget.h \
+		../../action/myplaylist.h \
+		../../action/myplayengine.h ../../main.cpp \
 		../../ui/mymainwindow.cpp \
 		../../ui/myplaylistwidget.cpp \
 		../../ui/myplaywidget.cpp \
 		../../ui/myvideotranscodewidget.cpp \
 		../../ui/myvideoframewidget.cpp \
-		../../ui/mycaptionrecognitionwidget.cpp
+		../../ui/mycaptionrecognitionwidget.cpp \
+		../../action/myplaylist.cpp \
+		../../action/myplayengine.cpp
 QMAKE_TARGET  = MyFFmpeg
 DESTDIR       = 
 TARGET        = MyFFmpeg
@@ -192,11 +221,18 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/g++-base.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/g++-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/qconfig.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_Baloo.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KActivities.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KCoreAddons.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KFileMetaData.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KWindowSystem.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3danimation.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dcore.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dextras.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dinput.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dlogic.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquick.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickanimation.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickextras.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickinput.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickrender.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickscene2d.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3drender.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_accessibility_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_concurrent.pri \
@@ -206,11 +242,16 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designer.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designer_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designercomponents_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkcommon.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkcore.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkcore5.5.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkgui.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkgui5.5.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkwidget.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkwidget5.5.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_edid_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_egl_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri \
@@ -222,6 +263,7 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_help.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_help_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_input_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_kms_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri \
@@ -229,6 +271,7 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_openglextensions.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_openglextensions_private.pri \
@@ -244,6 +287,7 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_theme_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uiplugin.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uitools.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uitools_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_vulkan_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets_private.pri \
@@ -283,6 +327,7 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 		/usr/lib/x86_64-linux-gnu/libQt5PrintSupport.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Widgets.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5X11Extras.prl \
+		/usr/lib/x86_64-linux-gnu/libQt5Multimedia.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Gui.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5DBus.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Xml.prl \
@@ -299,11 +344,18 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/g++-base.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/g++-unix.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/qconfig.pri:
-/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_Baloo.pri:
-/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KActivities.pri:
-/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KCoreAddons.pri:
-/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KFileMetaData.pri:
-/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_KWindowSystem.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3danimation.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dcore.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dextras.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dinput.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dlogic.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquick.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickanimation.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickextras.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickinput.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickrender.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3dquickscene2d.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_3drender.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_accessibility_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_concurrent.pri:
@@ -313,11 +365,16 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designer.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designer_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designercomponents_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_devicediscovery_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkcommon.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkcore.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkcore5.5.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkgui.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkgui5.5.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkwidget.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dtkwidget5.5.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_edid_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_egl_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri:
@@ -329,6 +386,7 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_help.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_help_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_input_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_kms_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri:
@@ -336,6 +394,7 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_openglextensions.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_openglextensions_private.pri:
@@ -351,6 +410,7 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_theme_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uiplugin.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uitools.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uitools_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_vulkan_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets_private.pri:
@@ -390,6 +450,7 @@ Makefile: ../../MyFFmpeg.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 /usr/lib/x86_64-linux-gnu/libQt5PrintSupport.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Widgets.prl:
 /usr/lib/x86_64-linux-gnu/libQt5X11Extras.prl:
+/usr/lib/x86_64-linux-gnu/libQt5Multimedia.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Gui.prl:
 /usr/lib/x86_64-linux-gnu/libQt5DBus.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Xml.prl:
@@ -412,8 +473,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../ui/mymainwindow.h ../../ui/myplaylistwidget.h ../../ui/myplaywidget.h ../../ui/myvideotranscodewidget.h ../../ui/myvideoframewidget.h ../../ui/mycaptionrecognitionwidget.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp ../../ui/mymainwindow.cpp ../../ui/myplaylistwidget.cpp ../../ui/myplaywidget.cpp ../../ui/myvideotranscodewidget.cpp ../../ui/myvideoframewidget.cpp ../../ui/mycaptionrecognitionwidget.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../ui/mymainwindow.h ../../ui/myplaylistwidget.h ../../ui/myplaywidget.h ../../ui/myvideotranscodewidget.h ../../ui/myvideoframewidget.h ../../ui/mycaptionrecognitionwidget.h ../../action/myplaylist.h ../../action/myplayengine.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../main.cpp ../../ui/mymainwindow.cpp ../../ui/myplaylistwidget.cpp ../../ui/myplaywidget.cpp ../../ui/myvideotranscodewidget.cpp ../../ui/myvideoframewidget.cpp ../../ui/mycaptionrecognitionwidget.cpp ../../action/myplaylist.cpp ../../action/myplayengine.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -451,8 +512,26 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_myplaylistwidget.cpp moc_myplaywidget.cpp moc_myplayengine.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_myplaylistwidget.cpp moc_myplaywidget.cpp moc_myplayengine.cpp
+moc_myplaylistwidget.cpp: ../../ui/myplaylistwidget.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /data/home/wangcong/wangcong/workspace/qt_workspace/TestWorkspace/MyFFmpegDemo/MyFFmpeg/build/Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/data/home/wangcong/wangcong/workspace/qt_workspace/TestWorkspace/MyFFmpegDemo/MyFFmpeg -I/usr/include/libdtk-5.5.0/DWidget5.5 -I/usr/include/libdtk-5.5.0/DGui5.5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtX11Extras -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/libdtk-5.5.0/DCore5.5 -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/lib/gcc/x86_64-linux-gnu/8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../../ui/myplaylistwidget.h -o moc_myplaylistwidget.cpp
+
+moc_myplaywidget.cpp: ../../ui/myplaylistwidget.h \
+		../../action/myplayengine.h \
+		../../ui/myplaywidget.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /data/home/wangcong/wangcong/workspace/qt_workspace/TestWorkspace/MyFFmpegDemo/MyFFmpeg/build/Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/data/home/wangcong/wangcong/workspace/qt_workspace/TestWorkspace/MyFFmpegDemo/MyFFmpeg -I/usr/include/libdtk-5.5.0/DWidget5.5 -I/usr/include/libdtk-5.5.0/DGui5.5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtX11Extras -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/libdtk-5.5.0/DCore5.5 -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/lib/gcc/x86_64-linux-gnu/8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../../ui/myplaywidget.h -o moc_myplaywidget.cpp
+
+moc_myplayengine.cpp: ../../action/myplayengine.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /data/home/wangcong/wangcong/workspace/qt_workspace/TestWorkspace/MyFFmpegDemo/MyFFmpeg/build/Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/data/home/wangcong/wangcong/workspace/qt_workspace/TestWorkspace/MyFFmpegDemo/MyFFmpeg -I/usr/include/libdtk-5.5.0/DWidget5.5 -I/usr/include/libdtk-5.5.0/DGui5.5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtX11Extras -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/libdtk-5.5.0/DCore5.5 -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/lib/gcc/x86_64-linux-gnu/8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../../action/myplayengine.h -o moc_myplayengine.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -465,24 +544,28 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
 main.o: ../../main.cpp ../../ui/mymainwindow.h \
 		../../ui/myplaylistwidget.h \
-		../../ui/myplaywidget.h
+		../../ui/myplaywidget.h \
+		../../action/myplayengine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 mymainwindow.o: ../../ui/mymainwindow.cpp ../../ui/mymainwindow.h \
 		../../ui/myplaylistwidget.h \
-		../../ui/myplaywidget.h
+		../../ui/myplaywidget.h \
+		../../action/myplayengine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mymainwindow.o ../../ui/mymainwindow.cpp
 
 myplaylistwidget.o: ../../ui/myplaylistwidget.cpp ../../ui/myplaylistwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o myplaylistwidget.o ../../ui/myplaylistwidget.cpp
 
-myplaywidget.o: ../../ui/myplaywidget.cpp ../../ui/myplaywidget.h
+myplaywidget.o: ../../ui/myplaywidget.cpp ../../ui/myplaywidget.h \
+		../../ui/myplaylistwidget.h \
+		../../action/myplayengine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o myplaywidget.o ../../ui/myplaywidget.cpp
 
 myvideotranscodewidget.o: ../../ui/myvideotranscodewidget.cpp ../../ui/myvideotranscodewidget.h
@@ -494,8 +577,23 @@ myvideoframewidget.o: ../../ui/myvideoframewidget.cpp ../../ui/myvideoframewidge
 mycaptionrecognitionwidget.o: ../../ui/mycaptionrecognitionwidget.cpp ../../ui/mycaptionrecognitionwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mycaptionrecognitionwidget.o ../../ui/mycaptionrecognitionwidget.cpp
 
+myplaylist.o: ../../action/myplaylist.cpp ../../action/myplaylist.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o myplaylist.o ../../action/myplaylist.cpp
+
+myplayengine.o: ../../action/myplayengine.cpp ../../action/myplayengine.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o myplayengine.o ../../action/myplayengine.cpp
+
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
+
+moc_myplaylistwidget.o: moc_myplaylistwidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_myplaylistwidget.o moc_myplaylistwidget.cpp
+
+moc_myplaywidget.o: moc_myplaywidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_myplaywidget.o moc_myplaywidget.cpp
+
+moc_myplayengine.o: moc_myplayengine.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_myplayengine.o moc_myplayengine.cpp
 
 ####### Install
 

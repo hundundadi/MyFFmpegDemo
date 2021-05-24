@@ -39,17 +39,6 @@
 */
 #include "mymainwindow.h"
 
-namespace {
-    //const int TOOLBAR_HEIGHT = 244;
-    const int TOOLBAR_WIDTH = 40;
-    //const int BUTTON_SPACING = 10;
-    const QSize TOOL_ICON_SIZE = QSize(30, 30);
-    const QSize TOOL_BUTTON_SIZE = QSize(38, 38);
-    const QSize TOOL_SLIDERBlUR_SIZE = QSize(35, 190);
-    const QSize TOOL_SLIDER_SIZE = QSize(40, 180);
-    const QSize SPLITTER_SIZE = QSize(30, 1);
-}
-
 MyMainWindow::MyMainWindow()
 {
     init();
@@ -60,6 +49,8 @@ MyMainWindow::MyMainWindow()
  */
 void MyMainWindow::init()
 {
+    titlebar()->setTitle("MyFFmpegDemo"); //让标题栏无文字内容显示
+
     m_mainWidget = new DWidget ();
 
     initToolBar();
@@ -70,13 +61,9 @@ void MyMainWindow::init()
     DWidget* t_Widget = new DWidget ();
 
     QHBoxLayout *t_hBoxLayout = new QHBoxLayout();
-    m_PlayWidget = new MyPlayWidget ();
-    m_PlayWidget->setStyleSheet("border:1px groove rgba(0, 0, 0, 1);border-radius:0px;background-color:rgba(0, 255, 0, 1)");
-    m_PlayWidget->setFixedSize(600, 500);
+    initPlayWidget();
 
-    m_PlayListWidget = new MyPlayListWidget ();
-    m_PlayListWidget->setStyleSheet("border:1px groove rgba(0, 0, 0, 1);border-radius:0px;background-color:rgba(0, 0, 255, 1)");
-    m_PlayListWidget->setFixedSize(200, 500);
+    initPlayListWidget();
 
     t_hBoxLayout->addWidget(m_PlayWidget, 0, Qt::AlignLeft);
     t_hBoxLayout->addWidget(m_PlayListWidget, 0, Qt::AlignLeft);
@@ -101,17 +88,54 @@ void MyMainWindow::initToolBar()
     QAction* m_ActionToolBar1 = new QAction(QStringLiteral("视频转码"));
     QAction* m_ActionToolBar2 = new QAction(QStringLiteral("视频分帧"));
     QAction* m_ActionToolBar3 = new QAction(QStringLiteral("字幕识别"));
+    QAction* m_ActionToolBar4 = new QAction(QStringLiteral("图像滤波"));
     m_ActionToolBar1->setCheckable(true);
     m_ActionToolBar2->setCheckable(true);
     m_ActionToolBar3->setCheckable(true);
+    m_ActionToolBar4->setCheckable(true);
     m_ToolBarList.append(m_ActionToolBar1);
     m_ToolBarList.append(m_ActionToolBar2);
     m_ToolBarList.append(m_ActionToolBar3);
+    m_ToolBarList.append(m_ActionToolBar4);
     t_ToolBarActionGroup->addAction(m_ActionToolBar1);
     t_ToolBarActionGroup->addAction(m_ActionToolBar2);
     t_ToolBarActionGroup->addAction(m_ActionToolBar3);
+    t_ToolBarActionGroup->addAction(m_ActionToolBar4);
 
     m_ToolBar->addActions(m_ToolBarList);
     m_ToolBar->setStyleSheet("background-color:rgb(200,40,43);color:rgb(204,204,204)");
+
+}
+
+/**
+ * @brief 初始化播放窗口
+ */
+void MyMainWindow::initPlayWidget()
+{
+    m_PlayWidget = new MyPlayWidget ();
+    m_PlayWidget->setStyleSheet("border:1px groove rgba(0, 0, 0, 1);border-radius:0px;background-color:rgba(0, 255, 0, 1)");
+    m_PlayWidget->setFixedSize(600, 500);
+}
+
+/**
+ * @brief 初始化播放列表窗口
+ */
+void MyMainWindow::initPlayListWidget()
+{
+    m_PlayListWidget = new MyPlayListWidget ();
+    m_PlayListWidget->setStyleSheet("border:1px groove rgba(0, 0, 0, 1);border-radius:0px;background-color:rgba(0, 0, 255, 1)");
+    m_PlayListWidget->setFixedSize(200, 500);
+
+}
+
+/**
+ * @brief 调用播放引擎播放视频
+ */
+void MyMainWindow::playAV()
+{
+
+    QString currentFile = m_PlayListWidget->getCurrentFile();
+
+    m_playEngine->playVideo(currentFile);
 
 }

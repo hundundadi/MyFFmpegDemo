@@ -39,9 +39,11 @@
 */
 #ifndef MYMAINWINDOW_H
 #define MYMAINWINDOW_H
+//本项目的文件
 #include "ui/myplaylistwidget.h"
 #include "ui/myplaywidget.h"
 
+//dtk的类
 #include <DSlider>
 #include <DMainWindow>
 #include <DWidget>
@@ -51,10 +53,19 @@
 #include <DToolBar>
 #include <DMenu>
 #include <DMenuBar>
+#include <DTitlebar>
 
+//qt的类
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QActionGroup>
+
+//其他库
+
+//cpp标准库
+
+//linux系统库
+
 
 DWIDGET_USE_NAMESPACE
 
@@ -77,10 +88,20 @@ private:
      */
     void initToolBar();
 
+    /**
+     * @brief 初始化播放窗口
+     */
+    void initPlayWidget();
 
+    /**
+     * @brief 初始化播放列表
+     */
+    void initPlayListWidget();
 
-
-
+    /**
+     * @brief 调用播放引擎播放视频
+     */
+    void playAV();
 
 private :
     DToolBar* m_ToolBar;
@@ -89,9 +110,9 @@ private :
     MyPlayWidget *m_PlayWidget;
     MyPlayListWidget *m_PlayListWidget;
 
+    MyPlayEngine *m_playEngine;
 
-
-
+    QString currentFile;
 
 };
 

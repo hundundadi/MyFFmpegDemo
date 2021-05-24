@@ -41,7 +41,7 @@
 #define MYPLAYLIST_H
 
 /**
- * @brief 此类是播放列表出窗口
+ * @brief 此类是播放列表逻辑处理
  */
 class MyPlayList
 {

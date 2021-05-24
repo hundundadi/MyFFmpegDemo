@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 static const unsigned char qt_resource_data[] = {
-  // /data/home/wangcong/wangcong/workspace/qt_workspace/TestWorkspace/MyFFmpeg/images/logo.svg
+  // /data/home/wangcong/wangcong/workspace/qt_workspace/TestWorkspace/MyFFmpegDemo/MyFFmpeg/images/logo.svg
   0x0,0x0,0x15,0x53,
   0x3c,
   0x3f,0x78,0x6d,0x6c,0x20,0x76,0x65,0x72,0x73,0x69,0x6f,0x6e,0x3d,0x22,0x31,0x2e,
