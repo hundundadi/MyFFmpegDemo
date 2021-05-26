@@ -49,6 +49,7 @@
 #include <QImage>
 #include <QAudioOutput>
 #include <QDebug>
+#include <QSemaphore>
 
 //其他库
 #ifdef __cplusplus
@@ -79,6 +80,10 @@ extern "C"
 //linux系统库
 
 
+struct playResult {
+    bool flag;
+    QString message; ///< size left in the buffer
+};
 /**
  * @brief 视频播放的解复用线程
  */
@@ -92,9 +97,12 @@ public:
      * @brief 播放视频
      * @param 播放文件的路径
      */
-    void playVideo(const QString videoPath);
+    bool playVideo(const QString videoPath);
 
 private :
+    /**
+     * @brief 初始化解复用器
+     */
     void initMyAVDemux();
 
 
@@ -107,9 +115,17 @@ private:
     void run() override;
 
 private:
-    QString m_szFilename;
+    char * m_videoFileName;
 };
 
+
+
+const int g_bufferSize = 44100*10000;
+int g_CurrentRead = 0;
+int g_CurrentWrite = 0;
+char g_buffer[g_bufferSize];
+QSemaphore freeBytes(g_bufferSize);
+QSemaphore usedBytes;
 /**
  * @brief 声音播放线程
  */
@@ -117,7 +133,7 @@ class MyAudioPlayThread: public QThread
 {
 
 public:
-    MyAudioPlayThread();
+    MyAudioPlayThread(QObject *parent = nullptr);
 
 public slots:
     void updateAudioData(QByteArray audio);
@@ -130,7 +146,7 @@ private:
     QAudioOutput *m_audioOutput;
     QIODevice *m_audioOutDevice;
 
-    QString m_buf;
+    char *m_buf;
     int m_index;
 
 };
