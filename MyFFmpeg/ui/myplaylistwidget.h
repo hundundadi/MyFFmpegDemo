@@ -65,6 +65,10 @@ public:
      */
     QString getCurrentFile();
 
+signals:
+
+    void playFile();
+
 private slots:
     /**
      * @brief 将打开的文件添加到播放列表

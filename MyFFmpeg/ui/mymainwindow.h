@@ -81,7 +81,7 @@ private:
     /**
      * @brief init 初始化主窗口界面
      */
-    void init();
+    void initUI();
 
     /**
      * @brief 初始化工具栏

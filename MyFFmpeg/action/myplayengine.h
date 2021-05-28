@@ -120,18 +120,14 @@ private:
 
 
 
-const int g_bufferSize = 44100*10000;
-int g_CurrentRead = 0;
-int g_CurrentWrite = 0;
-char g_buffer[g_bufferSize];
-QSemaphore freeBytes(g_bufferSize);
-QSemaphore usedBytes;
+
 /**
  * @brief 声音播放线程
  */
 class MyAudioPlayThread: public QThread
 {
 
+    Q_OBJECT
 public:
     MyAudioPlayThread(QObject *parent = nullptr);
 

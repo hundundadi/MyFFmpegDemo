@@ -162,6 +162,7 @@ void MyPlayListWidget::showClick(QModelIndex index)
     DMessageBox msg;
     msg.setText(strTemp);
     msg.exec();
+    emit playFile();
 
 }
 

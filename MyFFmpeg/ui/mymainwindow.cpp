@@ -41,17 +41,20 @@
 
 MyMainWindow::MyMainWindow()
 {
-    init();
+    initUI();
+    m_playEngine = new MyPlayEngine();
+
 }
 
 /**
  * @brief MyMainWindow::init
  */
-void MyMainWindow::init()
+void MyMainWindow::initUI()
 {
     titlebar()->setTitle("MyFFmpegDemo"); //让标题栏无文字内容显示
 
     m_mainWidget = new DWidget ();
+
 
     initToolBar();
     m_mainWidget->setStyleSheet("border:1px groove rgba(0, 0, 0, 1);border-radius:0px");
@@ -125,6 +128,7 @@ void MyMainWindow::initPlayListWidget()
     m_PlayListWidget = new MyPlayListWidget ();
     m_PlayListWidget->setStyleSheet("border:1px groove rgba(0, 0, 0, 1);border-radius:0px;background-color:rgba(0, 0, 255, 1)");
     m_PlayListWidget->setFixedSize(200, 500);
+    connect(m_PlayListWidget,&MyPlayListWidget::playFile,this,&MyMainWindow::playAV);
 
 }
 
@@ -135,7 +139,6 @@ void MyMainWindow::playAV()
 {
 
     QString currentFile = m_PlayListWidget->getCurrentFile();
-
     m_playEngine->playVideo(currentFile);
 
 }

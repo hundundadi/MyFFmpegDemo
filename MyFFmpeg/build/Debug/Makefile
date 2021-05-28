@@ -14,7 +14,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_QML_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_X11EXTRAS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_DBUS_LIB -DQT_XML_LIB -DQT_NETWORK_LIB -DQT_CONCURRENT_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I../../../MyFFmpeg -I. -isystem /usr/include/libdtk-5.5.0/DWidget5.5 -isystem /usr/include/libdtk-5.5.0/DGui5.5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtPrintSupport/5.11.3/QtPrintSupport -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtX11Extras -isystem /usr/include/x86_64-linux-gnu/qt5/QtMultimedia -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/libdtk-5.5.0/DCore5.5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtDBus -isystem /usr/include/x86_64-linux-gnu/qt5/QtXml -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtConcurrent -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -isystem /usr/include/libdrm -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f
@@ -38,7 +38,7 @@ DISTNAME      = MyFFmpeg1.0.0
 DISTDIR = /data/home/wangcong/wangcong/workspace/qt_workspace/TestWorkspace/MyFFmpegDemo/MyFFmpeg/build/Debug/.tmp/MyFFmpeg1.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) -ldtkwidget5.5 -ldtkgui5.5 -lQt5PrintSupport -lQt5Widgets -lQt5X11Extras -lQt5Multimedia -lQt5Gui -ldtkcore5.5 -lQt5DBus -lQt5Xml -lQt5Network -lQt5Concurrent -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -lavformat -lavdevice -lavcodec -lavutil -lswscale -lswresample -lz -ldtkwidget5.5 -ldtkgui5.5 -lQt5PrintSupport -lQt5Widgets -lQt5X11Extras -lQt5Multimedia -lQt5Gui -ldtkcore5.5 -lQt5DBus -lQt5Xml -lQt5Network -lQt5Concurrent -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -510,7 +510,7 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
-	g++ -pipe -g -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
+	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: moc_myplaylistwidget.cpp moc_myplaywidget.cpp moc_myplayengine.cpp
 compiler_moc_header_clean:

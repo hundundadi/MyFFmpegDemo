@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MyPlayWidget_t {
     QByteArrayData data[4];
-    char stringdata0[34];
+    char stringdata0[30];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,12 +32,12 @@ struct qt_meta_stringdata_MyPlayWidget_t {
 static const qt_meta_stringdata_MyPlayWidget_t qt_meta_stringdata_MyPlayWidget = {
     {
 QT_MOC_LITERAL(0, 0, 12), // "MyPlayWidget"
-QT_MOC_LITERAL(1, 13, 15), // "slotGetOneFrame"
-QT_MOC_LITERAL(2, 29, 0), // ""
-QT_MOC_LITERAL(3, 30, 3) // "img"
+QT_MOC_LITERAL(1, 13, 11), // "showOneFram"
+QT_MOC_LITERAL(2, 25, 0), // ""
+QT_MOC_LITERAL(3, 26, 3) // "img"
 
     },
-    "MyPlayWidget\0slotGetOneFrame\0\0img"
+    "MyPlayWidget\0showOneFram\0\0img"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +69,7 @@ void MyPlayWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         MyPlayWidget *_t = static_cast<MyPlayWidget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->slotGetOneFrame((*reinterpret_cast< QImage(*)>(_a[1]))); break;
+        case 0: _t->showOneFram((*reinterpret_cast< QImage(*)>(_a[1]))); break;
         default: ;
         }
     }

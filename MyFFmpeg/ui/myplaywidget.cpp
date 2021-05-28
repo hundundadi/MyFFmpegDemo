@@ -41,7 +41,6 @@
 
 MyPlayWidget::MyPlayWidget()
 {
-
 }
 
 void MyPlayWidget::showOneFram(QImage img)

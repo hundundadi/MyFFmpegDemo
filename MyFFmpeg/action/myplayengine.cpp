@@ -41,18 +41,30 @@
 
 #define MAX_AUDIO_FRAME_SIZE 192000 // 1 second of 48khz 32bit audio
 
+const int g_bufferSize = 44100*10000;
+int g_CurrentRead = 0;
+int g_CurrentWrite = 0;
+char g_buffer[g_bufferSize];
+QSemaphore freeBytes(g_bufferSize);
+QSemaphore usedBytes;
+
 /***    MyPlayEngine     ***/
 
 MyPlayEngine::MyPlayEngine()
 {
     m_avDemuxThread = new MyAVDemuxThread ();
-    m_audioPlayThread = new MyAudioPlayThread ();
+    m_audioPlayThread = new MyAudioPlayThread (this);
 
     //链接信号 更新视频中的每一张图片与播放引擎的播放每张图片
     connect(m_avDemuxThread,&MyAVDemuxThread::updateVideoPic,this,&MyPlayEngine::showOneFram);
     connect(m_avDemuxThread,&MyAVDemuxThread::updateAudioData,m_audioPlayThread,&MyAudioPlayThread::updateAudioData);
     connect(m_avDemuxThread,&MyAVDemuxThread::finished,m_avDemuxThread,&MyAVDemuxThread::deleteLater);
     connect(m_audioPlayThread,&MyAudioPlayThread::finished,m_audioPlayThread,&MyAudioPlayThread::deleteLater);
+
+}
+
+MyPlayEngine::~MyPlayEngine()
+{
 
 }
 
@@ -432,12 +444,14 @@ void MyAudioPlayThread::initializeAudio(const QAudioDeviceInfo &deviceInfo)
     m_audioOutput = new QAudioOutput(deviceInfo,format);
 
     m_audioOutDevice = m_audioOutput->start();
+    qDebug() << "11111111111111111111111111";
     int bf = m_audioOutput->bytesFree();
     if(!m_buf)
     {
         m_buf = new char [bf * 2000];
     }
-
+    memset(m_buf, 0, bf * 2000);
+    m_index = 0;
 
 }
 
