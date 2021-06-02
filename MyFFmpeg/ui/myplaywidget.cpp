@@ -41,6 +41,8 @@
 
 MyPlayWidget::MyPlayWidget()
 {
+    this->setStyleSheet("border:1px groove rgba(0, 0, 0, 1);border-radius:0px;background-color:rgba(0, 255, 0, 1)");
+    this->setFixedSize(600, 500);
 }
 
 void MyPlayWidget::showOneFram(QImage img)

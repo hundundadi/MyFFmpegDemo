@@ -42,6 +42,7 @@
 #include <DWidgetUtil>
 #include <DApplicationSettings>
 #include "ui/mymainwindow.h"
+#include "action/myplayengine.h"
 DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
@@ -62,6 +63,8 @@ int main(int argc, char *argv[])
     // 保存程序的窗口主题设置
     DApplicationSettings as;
     Q_UNUSED(as)
+
+
 
     MyMainWindow w;
     w.setMinimumSize(800, 500);

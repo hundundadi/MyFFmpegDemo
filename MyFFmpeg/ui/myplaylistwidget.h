@@ -67,7 +67,7 @@ public:
 
 signals:
 
-    void playFile();
+    void playFile(QString currentFile);
 
 private slots:
     /**

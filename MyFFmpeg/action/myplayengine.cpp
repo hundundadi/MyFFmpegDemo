@@ -41,22 +41,19 @@
 
 #define MAX_AUDIO_FRAME_SIZE 192000 // 1 second of 48khz 32bit audio
 
-const int g_bufferSize = 44100*10000;
-int g_CurrentRead = 0;
-int g_CurrentWrite = 0;
-char g_buffer[g_bufferSize];
-QSemaphore freeBytes(g_bufferSize);
-QSemaphore usedBytes;
+
 
 /***    MyPlayEngine     ***/
 
 MyPlayEngine::MyPlayEngine()
 {
+
     m_avDemuxThread = new MyAVDemuxThread ();
     m_audioPlayThread = new MyAudioPlayThread (this);
 
     //链接信号 更新视频中的每一张图片与播放引擎的播放每张图片
     connect(m_avDemuxThread,&MyAVDemuxThread::updateVideoPic,this,&MyPlayEngine::showOneFram);
+    //链接音频线程 更新播放声音
     connect(m_avDemuxThread,&MyAVDemuxThread::updateAudioData,m_audioPlayThread,&MyAudioPlayThread::updateAudioData);
     connect(m_avDemuxThread,&MyAVDemuxThread::finished,m_avDemuxThread,&MyAVDemuxThread::deleteLater);
     connect(m_audioPlayThread,&MyAudioPlayThread::finished,m_audioPlayThread,&MyAudioPlayThread::deleteLater);
@@ -115,7 +112,7 @@ bool MyAVDemuxThread::playVideo(const QString videoPath)
 {
 
     if(videoPath.isNull()||videoPath.isEmpty()) return false;
-    m_videoFileName = videoPath.toLatin1().data();
+    m_videoFileName = videoPath;
     start();
     return true;
 }
@@ -125,7 +122,7 @@ bool MyAVDemuxThread::playVideo(const QString videoPath)
  */
 void MyAVDemuxThread::run()
 {
-    qDebug() << "播放开始！";
+    qDebug() << __TIME__ << __FUNCTION__ << __LINE__ << "播放开始！";
     AVFormatContext *avFormatContext = nullptr;    //一个视频文件的总数据
     AVPacket packet;                               //压缩后的数据（视频对应H.264等码流数据，音频对应AAC/MP3等码流数据）
     AVFrame *pFrame = nullptr;                     //未压缩后的数据（视频对应RGB/YUV像素数据，音频对应PCM采样数据）
@@ -142,7 +139,7 @@ void MyAVDemuxThread::run()
     }
 
     //打开文件并读取报头
-    if(avformat_open_input(&avFormatContext,m_videoFileName,nullptr,nullptr) != 0)
+    if(avformat_open_input(&avFormatContext,m_videoFileName.toLatin1().data(),nullptr,nullptr) != 0)
     {
         qDebug() << "不能初始化，无法分配 avFormatContext !";
         return;
@@ -192,7 +189,7 @@ void MyAVDemuxThread::run()
         pCodecCtxAudio =  avcodec_alloc_context3(nullptr);
         if(!pCodecCtxAudio)
         {
-            qDebug() << "音频笔编解码报文初始化失败！";
+            qDebug() << "音频编解码报文初始化失败！";
             return;
         }
 
@@ -239,6 +236,7 @@ void MyAVDemuxThread::run()
         //分配一个适合所有内存访问的对齐内存块(包括CPU上可用的向量)。
         audioBuffer = (uint8_t *)av_malloc(MAX_AUDIO_FRAME_SIZE * 2);
 
+        //ffmpeg中刚刚解码出的数据因为排列方式的原因，不能直接播放，必须要转换
         //分配SwrContext
         au_convert_ctx = swr_alloc();
         //设置公共参数
@@ -259,13 +257,12 @@ void MyAVDemuxThread::run()
     AVCodecContext *pVideoCodecContext = nullptr;   //视频编解码报文
     AVCodec        *pCodecVideo;                    //视频编解码器
     AVCodecParameters *pVideoChannelCodecPara = nullptr; //视频编解码参数
-    int iWindowWidth = 0;
-    int iWindowHeight = 0;
     struct SwsContext *img_convert_ctx = nullptr;   //图片重采样报文
     struct SwsContext *img_convert_ctx_rgb = nullptr;  //rgb格式图片重采样
     AVFrame *pFrameYUV = nullptr;                   //YUV原始码流
     AVFrame *pFrameRGB = nullptr;                   //RGB原始码流
-
+    int iWindowWidth = 0;
+    int iWindowHeight = 0;
     unsigned char *rgbBuffer;
     unsigned char *yuvBuffer;
 
@@ -309,30 +306,49 @@ void MyAVDemuxThread::run()
         iWindowHeight = pVideoCodecContext->height;
 
         //获取图片重采样报文分配并返回一个SwsContext。您需要它来使用sws_scale()执行缩放/转换操作。
-        img_convert_ctx = sws_getContext(iWindowWidth,
-                                         iWindowHeight,
+        img_convert_ctx = sws_getContext(pVideoCodecContext->width,
+                                         pVideoCodecContext->height,
                                          pVideoCodecContext->pix_fmt,
-                                         iWindowWidth,
-                                         iWindowHeight,
-                                         AV_PIX_FMT_RGB32,
+                                         pVideoCodecContext->width,
+                                         pVideoCodecContext->height,
+                                         AV_PIX_FMT_YUV420P,
                                          SWS_BICUBIC,
                                          nullptr,
                                          nullptr,
                                          nullptr);
+
+        img_convert_ctx_rgb = sws_getContext(pVideoCodecContext->width,
+                                             pVideoCodecContext->height,
+                                             AV_PIX_FMT_YUV420P,
+                                             pVideoCodecContext->width,
+                                             pVideoCodecContext->height,
+                                             AV_PIX_FMT_RGB32,
+                                             SWS_BICUBIC,
+                                             nullptr,
+                                             nullptr,
+                                             nullptr);
         pFrameYUV = av_frame_alloc();
         pFrameRGB = av_frame_alloc();
 
         //计算一个标准画面的大小
-        yuvBuffer = static_cast<unsigned char*>(av_malloc(sizeof (av_image_get_buffer_size(AV_PIX_FMT_YUV420P,iWindowWidth,iWindowHeight,1))));
-        rgbBuffer = static_cast<unsigned char*>(av_malloc(sizeof (av_image_get_buffer_size(AV_PIX_FMT_RGB32,iWindowWidth,iWindowHeight,1))));
-
+        yuvBuffer = static_cast<unsigned char *>(av_malloc(av_image_get_buffer_size(AV_PIX_FMT_YUV420P,
+                                                                        pVideoCodecContext->width,
+                                                                        pVideoCodecContext->height,
+                                                                        1)));
+        rgbBuffer = static_cast<unsigned char *>(av_malloc(av_image_get_buffer_size(AV_PIX_FMT_RGB32,
+                                                                        pVideoCodecContext->width,
+                                                                        pVideoCodecContext->height,
+                                                                        1
+                                                                        )));
         //根据指定的图像参数和提供的数组设置数据指针和行大小
-        av_image_fill_arrays(pFrameYUV->data,pFrameYUV->linesize,yuvBuffer,AV_PIX_FMT_YUV420P,iWindowWidth,iWindowHeight,1);
-        av_image_fill_arrays(pFrameRGB->data,pFrameRGB->linesize,rgbBuffer,AV_PIX_FMT_RGB32,iWindowWidth,iWindowHeight,1);
+        av_image_fill_arrays(pFrameYUV->data,pFrameYUV->linesize,yuvBuffer,AV_PIX_FMT_YUV420P,pVideoCodecContext->width,pVideoCodecContext->height,1);
+        av_image_fill_arrays(pFrameRGB->data,pFrameRGB->linesize,rgbBuffer,AV_PIX_FMT_RGB32,pVideoCodecContext->width,pVideoCodecContext->height,1);
     }
 
     //打印有关输入或输出格式的详细信息，如持续时间、比特率、流、容器、程序、元数据、侧数据、编解码器和时间基。
-    av_dump_format(avFormatContext,0,m_videoFileName,false);
+    qDebug() << "--------------- File Information ----------------";
+    av_dump_format(avFormatContext,0,m_videoFileName.toLatin1().data(),false);
+    qDebug() << "-------------------------------------------------";
 
     //遍历流，返回流的下一帧。
     while (av_read_frame(avFormatContext,&packet) >= 0)
@@ -378,9 +394,10 @@ void MyAVDemuxThread::run()
             {
                 //缩放图片
                 sws_scale(img_convert_ctx,pFrame->data,pFrame->linesize,0,pVideoCodecContext->height,pFrameYUV->data,pFrameYUV->linesize);
+                //qDebug() << "img_convert_ctx_rgb: " << img_convert_ctx_rgb;
                 if(img_convert_ctx_rgb)
                 {
-                    sws_scale(img_convert_ctx_rgb,pFrameYUV->data,pFrameYUV->linesize,0,pVideoCodecContext->height,pFrameRGB->data,pFrameYUV->linesize);
+                    sws_scale(img_convert_ctx_rgb,pFrameYUV->data,pFrameYUV->linesize,0,pVideoCodecContext->height,pFrameRGB->data,pFrameRGB->linesize);
                     QImage image((uchar *)pFrameRGB->data[0],iWindowWidth,iWindowHeight,QImage::Format_ARGB32);
                     emit updateVideoPic(image);
                 }
@@ -397,13 +414,18 @@ void MyAVDemuxThread::run()
 /***    MyAVDemuxThread     ***/
 
 /***    MyAudioPlayThread     ***/
-
+const int g_bufferSize = 44100*10000;
+int g_CurrentRead = 0;
+int g_CurrentWrite = 0;
+char g_buffer[g_bufferSize];
+QSemaphore freeBytes(g_bufferSize);
+QSemaphore usedBytes;
 MyAudioPlayThread::MyAudioPlayThread(QObject *parent):
     QThread (parent),
     m_audioOutput(nullptr),
     m_audioOutDevice(nullptr),
-    m_index(0),
-    m_buf(nullptr)
+    m_buf(nullptr),
+    m_index(0)
 {
     //返回默认输出音频设备的信息。所有的平台和音频插件实现都提供了默认的音频设备来使用
     initializeAudio(QAudioDeviceInfo::defaultInputDevice());
@@ -441,10 +463,12 @@ void MyAudioPlayThread::initializeAudio(const QAudioDeviceInfo &deviceInfo)
         format = deviceInfo.nearestFormat(format);
     }
 
-    m_audioOutput = new QAudioOutput(deviceInfo,format);
-
+    //m_audioOutput = new QAudioOutput(deviceInfo,format);
+    m_audioOutput = new QAudioOutput(format);
+    //qDebug() << __LINE__ << deviceInfo.isNull() << deviceInfo.deviceName();
     m_audioOutDevice = m_audioOutput->start();
-    qDebug() << "11111111111111111111111111";
+    //qDebug() << __LINE__;
+
     int bf = m_audioOutput->bytesFree();
     if(!m_buf)
     {

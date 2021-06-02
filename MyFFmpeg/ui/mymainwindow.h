@@ -101,7 +101,7 @@ private:
     /**
      * @brief 调用播放引擎播放视频
      */
-    void playAV();
+    void playAV(QString currentFile);
 
 private :
     DToolBar* m_ToolBar;

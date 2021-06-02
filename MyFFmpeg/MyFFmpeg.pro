@@ -1,7 +1,7 @@
 QT += dtkgui5.5
 QT += dtkwidget5.5
 QT += core multimedia
-
+QT +=widgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = MyFFmpeg

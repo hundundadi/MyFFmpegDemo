@@ -503,6 +503,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: ../../resources.qrc \
 		/usr/lib/qt5/bin/rcc \
+		../../images/ok.svg \
 		../../images/logo.svg
 	/usr/lib/qt5/bin/rcc -name resources ../../resources.qrc -o qrc_resources.cpp
 

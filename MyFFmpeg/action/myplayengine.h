@@ -50,6 +50,8 @@
 #include <QAudioOutput>
 #include <QDebug>
 #include <QSemaphore>
+#include <QException>
+#include <QIODevice>
 
 //其他库
 #ifdef __cplusplus
@@ -115,7 +117,7 @@ private:
     void run() override;
 
 private:
-    char * m_videoFileName;
+    QString  m_videoFileName;
 };
 
 

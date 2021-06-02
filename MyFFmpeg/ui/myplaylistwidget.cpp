@@ -41,6 +41,8 @@
 
 MyPlayListWidget::MyPlayListWidget()
 {
+    this->setStyleSheet("border:1px groove rgba(0, 0, 0, 1);border-radius:0px;background-color:rgba(0, 0, 150, 1)");
+    this->setFixedSize(200, 500);
     initUi();
 }
 
@@ -58,8 +60,8 @@ void MyPlayListWidget::initUi()
     m_playListView->setAutoFillBackground(true);
 
     if(m_playFileMap.empty()){
-        m_playFileMap.insert("视频一","/images/ok.svg");
-        m_playFileMap.insert("视频二","/images/ok.svg");
+        m_playFileMap.insert("/home/wangcong/Videos/VideoTest/50fps.mp4",":/images/ok.svg");
+        m_playFileMap.insert("/home/wangcong/Videos/VideoTest/30fps.mp4",":/images/ok.svg");
     }
     QStandardItemModel *tItemModel = new QStandardItemModel();
     QMap<QString,QString>::Iterator it=m_playFileMap.begin();
@@ -105,7 +107,7 @@ bool MyPlayListWidget::addVideoForPlayList()
     if(0 == tOpenFiles.length()) return false;
     for(QString i_file : tOpenFiles){
         QFileInfo fileInfo(i_file);
-        m_playFileMap.insert(fileInfo.fileName(),":images/ok.svg");
+        m_playFileMap.insert(fileInfo.filePath(),":images/ok.svg");
         m_playFileMap.keys().sort(Qt::CaseSensitivity::CaseSensitive);
     }
     bool flag = apendPlayListView();
@@ -156,13 +158,13 @@ bool MyPlayListWidget::apendPlayListView()
  */
 void MyPlayListWidget::showClick(QModelIndex index)
 {
-    QString strTemp;
-    strTemp = index.data().toString();
+    //QString strTemp;
+    //strTemp = index.data().toString();
     m_currentFile = index.data().toString();
-    DMessageBox msg;
-    msg.setText(strTemp);
-    msg.exec();
-    emit playFile();
+    //DMessageBox msg;
+    //msg.setText(strTemp);
+    //msg.exec();
+    emit playFile(m_currentFile);
 
 }
 

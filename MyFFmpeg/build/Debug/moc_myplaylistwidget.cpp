@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MyPlayListWidget_t {
-    QByteArrayData data[7];
-    char stringdata0[75];
+    QByteArrayData data[8];
+    char stringdata0[87];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,13 +34,14 @@ static const qt_meta_stringdata_MyPlayListWidget_t qt_meta_stringdata_MyPlayList
 QT_MOC_LITERAL(0, 0, 16), // "MyPlayListWidget"
 QT_MOC_LITERAL(1, 17, 8), // "playFile"
 QT_MOC_LITERAL(2, 26, 0), // ""
-QT_MOC_LITERAL(3, 27, 19), // "addVideoForPlayList"
-QT_MOC_LITERAL(4, 47, 9), // "showClick"
-QT_MOC_LITERAL(5, 57, 11), // "QModelIndex"
-QT_MOC_LITERAL(6, 69, 5) // "index"
+QT_MOC_LITERAL(3, 27, 11), // "currentFile"
+QT_MOC_LITERAL(4, 39, 19), // "addVideoForPlayList"
+QT_MOC_LITERAL(5, 59, 9), // "showClick"
+QT_MOC_LITERAL(6, 69, 11), // "QModelIndex"
+QT_MOC_LITERAL(7, 81, 5) // "index"
 
     },
-    "MyPlayListWidget\0playFile\0\0"
+    "MyPlayListWidget\0playFile\0\0currentFile\0"
     "addVideoForPlayList\0showClick\0QModelIndex\0"
     "index"
 };
@@ -60,18 +61,18 @@ static const uint qt_meta_data_MyPlayListWidget[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x06 /* Public */,
+       1,    1,   29,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   30,    2, 0x08 /* Private */,
-       4,    1,   31,    2, 0x08 /* Private */,
+       4,    0,   32,    2, 0x08 /* Private */,
+       5,    1,   33,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    3,
 
  // slots: parameters
     QMetaType::Bool,
-    QMetaType::Void, 0x80000000 | 5,    6,
+    QMetaType::Void, 0x80000000 | 6,    7,
 
        0        // eod
 };
@@ -82,7 +83,7 @@ void MyPlayListWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         MyPlayListWidget *_t = static_cast<MyPlayListWidget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->playFile(); break;
+        case 0: _t->playFile((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: { bool _r = _t->addVideoForPlayList();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 2: _t->showClick((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
@@ -91,7 +92,7 @@ void MyPlayListWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (MyPlayListWidget::*)();
+            using _t = void (MyPlayListWidget::*)(QString );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&MyPlayListWidget::playFile)) {
                 *result = 0;
                 return;
@@ -137,9 +138,10 @@ int MyPlayListWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void MyPlayListWidget::playFile()
+void MyPlayListWidget::playFile(QString _t1)
 {
-    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

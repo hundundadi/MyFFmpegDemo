@@ -41,9 +41,10 @@
 
 MyMainWindow::MyMainWindow()
 {
+
     initUI();
     m_playEngine = new MyPlayEngine();
-
+    connect(m_playEngine,&MyPlayEngine::showOneFram,m_PlayWidget,&MyPlayWidget::showOneFram);
 }
 
 /**
@@ -68,7 +69,13 @@ void MyMainWindow::initUI()
 
     initPlayListWidget();
 
-    t_hBoxLayout->addWidget(m_PlayWidget, 0, Qt::AlignLeft);
+    DWidget *pWidget = new DWidget();
+    pWidget->setStyleSheet("border:1px groove rgba(0, 0, 0, 1);border-radius:0px;background-color:rgba(0, 255, 0, 1)");
+    pWidget->setFixedSize(600, 500);
+
+    m_PlayWidget->setParent(pWidget);
+
+    t_hBoxLayout->addWidget(pWidget, 0, Qt::AlignLeft);
     t_hBoxLayout->addWidget(m_PlayListWidget, 0, Qt::AlignLeft);
     t_Widget->setLayout(t_hBoxLayout);
 
@@ -115,9 +122,9 @@ void MyMainWindow::initToolBar()
  */
 void MyMainWindow::initPlayWidget()
 {
+
     m_PlayWidget = new MyPlayWidget ();
-    m_PlayWidget->setStyleSheet("border:1px groove rgba(0, 0, 0, 1);border-radius:0px;background-color:rgba(0, 255, 0, 1)");
-    m_PlayWidget->setFixedSize(600, 500);
+
 }
 
 /**
@@ -126,8 +133,7 @@ void MyMainWindow::initPlayWidget()
 void MyMainWindow::initPlayListWidget()
 {
     m_PlayListWidget = new MyPlayListWidget ();
-    m_PlayListWidget->setStyleSheet("border:1px groove rgba(0, 0, 0, 1);border-radius:0px;background-color:rgba(0, 0, 255, 1)");
-    m_PlayListWidget->setFixedSize(200, 500);
+
     connect(m_PlayListWidget,&MyPlayListWidget::playFile,this,&MyMainWindow::playAV);
 
 }
@@ -135,10 +141,10 @@ void MyMainWindow::initPlayListWidget()
 /**
  * @brief 调用播放引擎播放视频
  */
-void MyMainWindow::playAV()
+void MyMainWindow::playAV(QString currentFile)
 {
 
-    QString currentFile = m_PlayListWidget->getCurrentFile();
+    //QString currentFile = m_PlayListWidget->getCurrentFile();
     m_playEngine->playVideo(currentFile);
 
 }
